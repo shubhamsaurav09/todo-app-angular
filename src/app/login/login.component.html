@@ -1,0 +1,71 @@
+<div class="login-container">
+  <div class="inner-login-container">
+    <div class="login-form">
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <h2>Login</h2>
+        <div class="form-group">
+          <input
+            type="text"
+            id="email"
+            [formControlName]="'email'"
+            placeholder="Email"
+            [ngClass]="{
+              inputAlert:
+                signInForm.controls['email'].touched &&
+                signInForm.controls['email'].invalid
+            }"
+          />
+          <div
+            class="invalid-alert"
+            *ngIf="
+              signInForm.controls['email'].touched &&
+              signInForm.controls['email'].invalid
+            "
+          >
+            <div *ngIf="signInForm.controls['email'].errors.pattern">
+              Enter a correct e-mail id.
+            </div>
+            <div *ngIf="signInForm.controls['email'].errors.required">
+              Email is required.
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            id="password"
+            [formControlName]="'password'"
+            placeholder="Password"
+            [ngClass]="{
+              inputAlert:
+                signInForm.controls['password'].touched &&
+                signInForm.controls['password'].invalid
+            }"
+          />
+          <div
+            class="invalid-alert"
+            *ngIf="
+              signInForm.controls['password'].touched &&
+              signInForm.controls['password'].invalid
+            "
+          >
+            <div *ngIf="signInForm.controls['password'].errors.pattern">
+              Enter a password with atleast 1 Uppercase and 1 number
+            </div>
+            <div *ngIf="signInForm.controls['password'].errors.required">
+              Password is required.
+            </div>
+          </div>
+        </div>
+        <button
+          class="submit-btn"
+          type="submit"
+          [disabled]="signInForm.invalid"
+          [ngClass]="{ enabled: !signInForm.invalid }"
+        >
+          Sign In
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

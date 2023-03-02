@@ -1,0 +1,37 @@
+<div class="todo-container">
+  <div class="todo-header">
+    <h2>Todo List</h2>
+  </div>
+  <div class="todo-body">
+    <div class="todo-input">
+      <input type="text" placeholder="Enter your task" #todoInput />
+      <button (click)="onClick(todoInput)">
+        <fa-icon [icon]="faAdd"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <ul class="todo-list">
+    <li *ngFor="let item of todoArray" class="todo-list-item">
+      <input
+        type="text"
+        value="{{ item.todoItem }}"
+        [readOnly]="!editClicked"
+        #updateInput
+      />
+      <div class="todo-list-icons">
+        <button *ngIf="!editClicked" (click)="editClick()">
+          <fa-icon [icon]="faPen"></fa-icon>
+        </button>
+        <button
+          *ngIf="editClicked"
+          (click)="onTodoUpdate(item.id, updateInput)"
+        >
+          <fa-icon [icon]="faAdd"></fa-icon>
+        </button>
+        <button (click)="deleteTodo(item.id)">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
